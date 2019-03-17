@@ -17,7 +17,7 @@
 <script>
 import axios from 'axios';
 export default {
-   asyncData(context){ 
+  asyncData(context){ 
      return axios.get('https://nuxt-ap.firebaseio.com/posts/'+context.params.id+'.json')
      .then(res=>{
        return {
@@ -25,7 +25,7 @@ export default {
        }
      })
      .catch(e=>context.error(e))
-  },
+  }
 }
 </script>
 

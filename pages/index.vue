@@ -13,6 +13,7 @@
 <script>
 import Logo from '~/components/Logo.vue';
 import PostList from '@/components/Posts/PostList';
+import axios from 'axios';
 
 export default {
   components: {
@@ -21,7 +22,7 @@ export default {
   },
   computed:{
     loadedPosts(){
-      return this.$store.gtters.loadedPosts
+      return this.$store.getters.loadedPosts
     }
   },
   data() {
@@ -38,6 +39,17 @@ export default {
   },
   created(){
 
+  },
+  
+
+  asyncData(context){ 
+     return axios.get('https://nuxt-ap.firebaseio.com/posts/'+context.params.id+'.json')
+     .then(res=>{
+       return {
+         loadedPost: res.data
+       }
+     })
+     .catch(e=>context.error(e))
   }
 
 }
